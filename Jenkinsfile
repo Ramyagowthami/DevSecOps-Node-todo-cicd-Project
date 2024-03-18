@@ -3,16 +3,15 @@ pipeline {
     environment{
         SONAR_HOME = tool "Sonar"
     }
-    
-    
     stages {
-        
         stage("code"){
             steps{
-                git url: "https://github.com/Ramyagowthami/cicd/", branch: "master"
-                echo 'code cloned'
+        stage('Build Maven'){
+            steps{
+                git url:'https://github.com/Ramyagowthami/DevSecOps-Node-todo-cicd-Project/', branch: "master"
+               sh 'mvn clean install'
             }
-        }
+                }
         stage("SonarQube Analysis"){
             steps{
                withSonarQubeEnv("testSonarqube"){
