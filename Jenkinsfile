@@ -4,8 +4,6 @@ pipeline {
         SONAR_HOME = tool "Sonar"
     }
     stages {
-        stage("code"){
-            steps{
         stage('Build Maven'){
             steps{
                 git url:'https://github.com/Ramyagowthami/DevSecOps-Node-todo-cicd-Project/', branch: "master"
@@ -14,7 +12,7 @@ pipeline {
                 }
         stage("SonarQube Analysis"){
             steps{
-               withSonarQubeEnv("testSonarqube"){
+               withSonarQubeEnv("Sonar"){
                    sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=nodetodo -Dsonar.projectKey=nodetodo -X"
                }
             }
